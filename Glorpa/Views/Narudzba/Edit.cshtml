@@ -1,0 +1,48 @@
+﻿@model Glorpa.Models.Narudzba
+
+<h1>Edit Narudzba</h1>
+
+<form asp-action="Edit">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Datum"></label>
+        <input asp-for="Datum" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <input asp-for="Status" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UkupnaCijena"></label>
+        <input asp-for="UkupnaCijena" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NacinPlacanja"></label>
+
+        <select asp-for="NacinPlacanja"
+                asp-items="Html.GetEnumSelectList<Glorpa.Enums.TipPlacanja>()"
+                class="form-control">
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="KorisnikId"></label>
+
+        <select asp-for="KorisnikId"
+                asp-items="ViewBag.KorisnikId"
+                class="form-control">
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+
+</form>

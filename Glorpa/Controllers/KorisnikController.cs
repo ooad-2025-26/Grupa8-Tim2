@@ -1,14 +1,17 @@
-﻿using Glorpa.Data;
-using Glorpa.Enums;
-using Glorpa.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Glorpa.Data;
+using Glorpa.Models;
+using Glorpa.Enums;
 
 namespace Glorpa.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class KorisnikController : ControllerBase
+    public class KorisnikController : Controller
     {
         private readonly DataContext _context;
 
@@ -17,44 +20,159 @@ namespace Glorpa.Controllers
             _context = context;
         }
 
-        // svi korisnici
-        [HttpGet]
-        public async Task<IActionResult> GetKorisnici()
+        // GET: Korisnik
+        public async Task<IActionResult> Index()
         {
-            return Ok(await _context.Korisnici.ToListAsync());
+            var dataContext = _context.Korisnici
+                .Include(k => k.Dug);
+
+            return View(await dataContext.ToListAsync());
         }
 
-        // samo kupci
-        [HttpGet("kupci")]
-        public async Task<IActionResult> GetKupci()
+        // GET: Korisnik/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            var kupci = await _context.Korisnici
-                .Where(k => k.Uloga == TipKorisnika.Kupac)
-                .ToListAsync();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            return Ok(kupci);
+            var korisnik = await _context.Korisnici
+                .Include(k => k.Dug)
+                .Include(k => k.Narudzbe)
+                .Include(k => k.ZahtjeviPodrske)
+                .Include(k => k.Rasporedi)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (korisnik == null)
+            {
+                return NotFound();
+            }
+
+            return View(korisnik);
         }
 
-        // samo dostavljaci
-        [HttpGet("dostavljaci")]
-        public async Task<IActionResult> GetDostavljaci()
+        // GET: Korisnik/Create
+        public IActionResult Create()
         {
-            var dostavljaci = await _context.Korisnici
-                .Where(k => k.Uloga == TipKorisnika.Dostavljac)
-                .ToListAsync();
-
-            return Ok(dostavljaci);
+            return View();
         }
 
-        // samo administratori
-        [HttpGet("administratori")]
-        public async Task<IActionResult> GetAdministratori()
+        // POST: Korisnik/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(
+            [Bind("Id,Ime,Prezime,Email,Telefon,Lozinka,Uloga")]
+            Korisnik korisnik)
         {
-            var administratori = await _context.Korisnici
-                .Where(k => k.Uloga == TipKorisnika.Administrator)
-                .ToListAsync();
+            if (ModelState.IsValid)
+            {
+                _context.Add(korisnik);
 
-            return Ok(administratori);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(korisnik);
+        }
+
+        // GET: Korisnik/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var korisnik = await _context.Korisnici.FindAsync(id);
+
+            if (korisnik == null)
+            {
+                return NotFound();
+            }
+
+            return View(korisnik);
+        }
+
+        // POST: Korisnik/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(
+            int id,
+            [Bind("Id,Ime,Prezime,Email,Telefon,Lozinka,Uloga")]
+            Korisnik korisnik)
+        {
+            if (id != korisnik.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(korisnik);
+
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!KorisnikExists(korisnik.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(korisnik);
+        }
+
+        // GET: Korisnik/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var korisnik = await _context.Korisnici
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (korisnik == null)
+            {
+                return NotFound();
+            }
+
+            return View(korisnik);
+        }
+
+        // POST: Korisnik/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var korisnik = await _context.Korisnici.FindAsync(id);
+
+            if (korisnik != null)
+            {
+                _context.Korisnici.Remove(korisnik);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool KorisnikExists(int id)
+        {
+            return _context.Korisnici.Any(e => e.Id == id);
         }
     }
 }

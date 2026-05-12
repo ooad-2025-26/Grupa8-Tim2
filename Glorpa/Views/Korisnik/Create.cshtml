@@ -1,0 +1,47 @@
+﻿@model Glorpa.Models.Korisnik
+
+<h1>Create Korisnik</h1>
+
+<form asp-action="Create" method="post">
+
+    <div class="form-group">
+        <label asp-for="Ime"></label>
+        <input asp-for="Ime" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Prezime"></label>
+        <input asp-for="Prezime" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Telefon"></label>
+        <input asp-for="Telefon" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Lozinka"></label>
+        <input asp-for="Lozinka" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Uloga"></label>
+
+        <select asp-for="Uloga"
+                asp-items="Html.GetEnumSelectList<Glorpa.Enums.TipKorisnika>()"
+                class="form-control">
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+
+</form>
