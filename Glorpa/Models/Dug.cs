@@ -11,7 +11,7 @@
         public bool Placeno { get; set; }
 
         // FK
-        public int KorisnikId { get; set; }
+        public string KorisnikId { get; set; }
 
         public Korisnik Korisnik { get; set; }
     }

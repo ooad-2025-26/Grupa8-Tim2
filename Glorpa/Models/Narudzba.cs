@@ -15,7 +15,7 @@ namespace Glorpa.Models
         public TipPlacanja NacinPlacanja { get; set; }
 
 
-        public int KorisnikId { get; set; }
+        public string KorisnikId { get; set; }
 
         public Korisnik Korisnik { get; set; }
 

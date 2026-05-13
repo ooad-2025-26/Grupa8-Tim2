@@ -258,3 +258,4 @@ C:\Users\muham\source\repos\Glorpa\Glorpa\obj\Debug\net8.0\refint\Glorpa.dll
 C:\Users\muham\source\repos\Glorpa\Glorpa\obj\Debug\net8.0\Glorpa.pdb
 C:\Users\muham\source\repos\Glorpa\Glorpa\obj\Debug\net8.0\Glorpa.genruntimeconfig.cache
 C:\Users\muham\source\repos\Glorpa\Glorpa\obj\Debug\net8.0\ref\Glorpa.dll
+C:\Users\muham\source\repos\Glorpa\Glorpa\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

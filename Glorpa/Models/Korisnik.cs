@@ -1,23 +1,18 @@
 ﻿using Glorpa.Enums;
 using System;
 using System.Collections.Generic;
-
+using Microsoft.AspNetCore.Identity;
 namespace Glorpa.Models
 {
-    public class Korisnik
+    public class Korisnik : IdentityUser
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Ime { get; set; }
 
         public string Prezime { get; set; }
 
-        public string Email { get; set; }
-
-        public string Telefon { get; set; }
-
-        public string Lozinka { get; set; }
-
+       
         public TipKorisnika Uloga { get; set; }
         public Dug Dug { get; set; }
 

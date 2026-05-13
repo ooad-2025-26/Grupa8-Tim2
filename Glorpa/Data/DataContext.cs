@@ -1,9 +1,9 @@
 ﻿using Glorpa.Models;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace Glorpa.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<Korisnik>
     {
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)

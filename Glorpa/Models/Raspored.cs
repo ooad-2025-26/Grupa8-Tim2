@@ -7,7 +7,7 @@
         public DateTime Sedmica { get; set; }
 
         // FK prema korisniku
-        public int KorisnikId { get; set; }
+        public string KorisnikId { get; set; }
 
         public Korisnik Korisnik { get; set; }
 

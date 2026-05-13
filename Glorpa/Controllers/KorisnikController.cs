@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Glorpa.Data;
 using Glorpa.Models;
-using Glorpa.Enums;
 
 namespace Glorpa.Controllers
 {
@@ -30,7 +28,7 @@ namespace Glorpa.Controllers
         }
 
         // GET: Korisnik/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -62,7 +60,7 @@ namespace Glorpa.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("Id,Ime,Prezime,Email,Telefon,Lozinka,Uloga")]
+            [Bind("Id,Ime,Prezime,Email,PhoneNumber,UlogaTip")]
             Korisnik korisnik)
         {
             if (ModelState.IsValid)
@@ -78,7 +76,7 @@ namespace Glorpa.Controllers
         }
 
         // GET: Korisnik/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -99,8 +97,8 @@ namespace Glorpa.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
-            int id,
-            [Bind("Id,Ime,Prezime,Email,Telefon,Lozinka,Uloga")]
+            string id,
+            [Bind("Id,Ime,Prezime,Email,PhoneNumber,UlogaTip")]
             Korisnik korisnik)
         {
             if (id != korisnik.Id)
@@ -135,7 +133,7 @@ namespace Glorpa.Controllers
         }
 
         // GET: Korisnik/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -156,7 +154,7 @@ namespace Glorpa.Controllers
         // POST: Korisnik/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var korisnik = await _context.Korisnici.FindAsync(id);
 
@@ -170,7 +168,7 @@ namespace Glorpa.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool KorisnikExists(int id)
+        private bool KorisnikExists(string id)
         {
             return _context.Korisnici.Any(e => e.Id == id);
         }

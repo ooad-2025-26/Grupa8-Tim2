@@ -1,6 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using Glorpa.Data;
-
+using Glorpa.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Connection string
@@ -12,6 +13,10 @@ var connectionString = builder.Configuration.GetConnectionString(
 // DbContext
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services
+    .AddIdentity<Korisnik, IdentityRole>()
+    .AddEntityFrameworkStores<DataContext>()
+    .AddDefaultTokenProviders();
 
 // MVC + API
 builder.Services.AddControllersWithViews();
@@ -39,7 +44,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 // MVC ruta
