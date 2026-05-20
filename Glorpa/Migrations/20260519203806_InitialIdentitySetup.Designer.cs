@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Glorpa.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20260513214558_IdentitySetup")]
-    partial class IdentitySetup
+    [Migration("20260519203806_InitialIdentitySetup")]
+    partial class InitialIdentitySetup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

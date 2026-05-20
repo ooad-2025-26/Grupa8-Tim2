@@ -60,17 +60,28 @@ namespace Glorpa.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("Id,Ime,Prezime,Email,PhoneNumber,UlogaTip")]
+            [Bind("Id,Ime,Prezime,Email,PhoneNumber,Uloga")]
             Korisnik korisnik)
         {
+            Console.WriteLine("USAO U CREATE");
+
+            // Identity zahtijeva UserName
+            korisnik.UserName = korisnik.Email;
+
             if (ModelState.IsValid)
             {
+                Console.WriteLine("MODEL VALID");
+
                 _context.Add(korisnik);
 
                 await _context.SaveChangesAsync();
 
+                Console.WriteLine("KORISNIK SACUVAN");
+
                 return RedirectToAction(nameof(Index));
             }
+
+            Console.WriteLine("MODEL NIJE VALID");
 
             return View(korisnik);
         }
@@ -98,7 +109,7 @@ namespace Glorpa.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
             string id,
-            [Bind("Id,Ime,Prezime,Email,PhoneNumber,UlogaTip")]
+            [Bind("Id,Ime,Prezime,Email,PhoneNumber,Uloga")]
             Korisnik korisnik)
         {
             if (id != korisnik.Id)
@@ -108,23 +119,21 @@ namespace Glorpa.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(korisnik);
+                var korisnikIzBaze = await _context.Korisnici.FindAsync(id);
 
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
+                if (korisnikIzBaze == null)
                 {
-                    if (!KorisnikExists(korisnik.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
+
+                korisnikIzBaze.Ime = korisnik.Ime;
+                korisnikIzBaze.Prezime = korisnik.Prezime;
+                korisnikIzBaze.Email = korisnik.Email;
+                korisnikIzBaze.UserName = korisnik.Email;
+                korisnikIzBaze.PhoneNumber = korisnik.PhoneNumber;
+                korisnikIzBaze.Uloga = korisnik.Uloga;
+
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Glorpa.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentitySetup : Migration
+    public partial class InitialIdentitySetup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -9,6 +9,7 @@ C:\Users\muham\source\repos\Glorpa\Glorpa\bin\Debug\net8.0\Glorpa.pdb
 C:\Users\muham\source\repos\Glorpa\Glorpa\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\muham\source\repos\Glorpa\Glorpa\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\muham\source\repos\Glorpa\Glorpa\bin\Debug\net8.0\Humanizer.dll
+C:\Users\muham\source\repos\Glorpa\Glorpa\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\muham\source\repos\Glorpa\Glorpa\bin\Debug\net8.0\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\muham\source\repos\Glorpa\Glorpa\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\muham\source\repos\Glorpa\Glorpa\bin\Debug\net8.0\Microsoft.Build.dll
@@ -258,4 +259,3 @@ C:\Users\muham\source\repos\Glorpa\Glorpa\obj\Debug\net8.0\refint\Glorpa.dll
 C:\Users\muham\source\repos\Glorpa\Glorpa\obj\Debug\net8.0\Glorpa.pdb
 C:\Users\muham\source\repos\Glorpa\Glorpa\obj\Debug\net8.0\Glorpa.genruntimeconfig.cache
 C:\Users\muham\source\repos\Glorpa\Glorpa\obj\Debug\net8.0\ref\Glorpa.dll
-C:\Users\muham\source\repos\Glorpa\Glorpa\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
