@@ -1,6 +1,0 @@
-@Glorpa_HostAddress = http://localhost:5003
-
-GET {{Glorpa_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
