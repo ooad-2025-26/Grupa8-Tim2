@@ -1,0 +1,22 @@
+﻿@model Glorpa.Models.Raspored
+
+<h1>Details</h1>
+
+<div>
+
+    <p>
+        <strong>Sedmica:</strong>
+        @Model.Sedmica
+    </p>
+
+    <p>
+        <strong>Korisnik:</strong>
+        @Model.Korisnik?.Ime
+    </p>
+
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

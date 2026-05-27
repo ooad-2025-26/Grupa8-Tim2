@@ -1,0 +1,33 @@
+﻿@model Glorpa.Models.VremenskiUslovi
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<div>
+
+    <p>
+        <strong>Tip:</strong>
+        @Model.Tip
+    </p>
+
+    <p>
+        <strong>Opis:</strong>
+        @Model.Opis
+    </p>
+
+</div>
+
+<form asp-action="Delete">
+
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Delete
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>

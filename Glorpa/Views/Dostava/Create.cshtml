@@ -1,0 +1,46 @@
+﻿@model Glorpa.Models.Dostava
+
+<h1>Create Dostava</h1>
+
+<form asp-action="Create">
+
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <input asp-for="Status" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VrijemePreuzimanja"></label>
+        <input asp-for="VrijemePreuzimanja" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VrijemeDostave"></label>
+        <input asp-for="VrijemeDostave" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NarudzbaId"></label>
+
+        <select asp-for="NarudzbaId"
+                asp-items="ViewBag.NarudzbaId"
+                class="form-control">
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VremenskiUsloviId"></label>
+
+        <select asp-for="VremenskiUsloviId"
+                asp-items="ViewBag.VremenskiUsloviId"
+                class="form-control">
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+
+</form>

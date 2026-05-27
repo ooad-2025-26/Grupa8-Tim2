@@ -1,0 +1,27 @@
+﻿@model Glorpa.Models.VremenskiUslovi
+
+<h1>Details</h1>
+
+<div>
+
+    <p>
+        <strong>Tip:</strong>
+        @Model.Tip
+    </p>
+
+    <p>
+        <strong>Opis:</strong>
+        @Model.Opis
+    </p>
+
+    <p>
+        <strong>Je li uslov:</strong>
+        @Model.JeLiUslov
+    </p>
+
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>
