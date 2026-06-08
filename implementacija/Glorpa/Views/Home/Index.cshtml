@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Glorpa";
+}
+
+<div class="text-center">
+
+    <h1 class="display-3">
+        Glorpa
+    </h1>
+
+    <p class="lead">
+        Sistem za dostavu hrane
+    </p>
+
+    <hr />
+
+    
+
+    <div class="mt-5">
+
+        <h3>
+            Izaberite svoju ulogu
+        </h3>
+
+        <div class="d-flex justify-content-center gap-3 mt-3">
+
+            <a asp-controller="Account"
+                   asp-action="RegisterKupac"
+                   class="btn btn-primary btn-lg">
+
+                Registruj se kao kupac
+
+            </a>
+
+            <a asp-controller="Account"
+                   asp-action="RegisterDostavljac"
+                   class="btn btn-success btn-lg">
+
+                Registruj se kao dostavljač
+
+            </a>
+
+            <a asp-controller="Account"
+                   asp-action="RegisterAdmin"
+                   class="btn btn-dark btn-lg">
+
+                Registruj se kao administrator
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

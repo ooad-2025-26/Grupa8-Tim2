@@ -1,0 +1,46 @@
+﻿@model Glorpa.Models.Zarada
+
+<h1>Create Zarada</h1>
+
+<form asp-action="Create">
+
+    <div class="form-group">
+        <label asp-for="Iznos"></label>
+        <input asp-for="Iznos" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Datum"></label>
+        <input asp-for="Datum" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TipZarade"></label>
+
+        <select asp-for="TipZarade"
+                asp-items="Html.GetEnumSelectList<Glorpa.Enums.TipZarade>()"
+                class="form-control">
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Sat"></label>
+        <input asp-for="Sat" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DostavaId"></label>
+
+        <select asp-for="DostavaId"
+                asp-items="ViewBag.DostavaId"
+                class="form-control">
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+
+</form>

@@ -1,0 +1,202 @@
+﻿@model IEnumerable<Glorpa.Models.Dostava>
+
+@{
+    Layout = "_DostavljacLayout";
+
+    var aktivne =
+        Model.Where(x => x.Status != "DOSTAVLJENA");
+
+    var zavrsene =
+        Model.Where(x => x.Status == "DOSTAVLJENA");
+}
+
+<div class="container mt-4">
+
+    <h1 class="mb-4">
+        Moje dostave
+    </h1>
+
+    <h3 class="text-success mb-3">
+        Aktivne dostave
+    </h3>
+
+    @if (!aktivne.Any())
+    {
+        <div class="alert alert-secondary">
+            Trenutno nema aktivnih dostava.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-success">
+
+            <thead>
+                <tr>
+                    <th>Narudžba</th>
+                    <th>Kupac</th>
+                    <th>Adresa</th>
+                    <th>Status</th>
+                    <th>Vrijeme preuzimanja</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in aktivne)
+                {
+                    <tr>
+
+                        <td>#@item.NarudzbaId</td>
+
+                        <td>
+                            @item.Narudzba?.Korisnik?.Ime
+                            @item.Narudzba?.Korisnik?.Prezime
+                        </td>
+
+                        <td>
+                            @item.Narudzba?.AdresaDostave
+                        </td>
+
+                        <td>
+                            <span class="badge bg-success">
+                                @item.Status
+                            </span>
+                        </td>
+
+                        <td>
+                            @item.VrijemePreuzimanja
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    }
+
+    <hr class="my-5" />
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+
+            <div class="card border-success shadow-sm">
+
+                <div class="card-body">
+
+                    <h5>Danas</h5>
+
+                    <h2 class="text-success">
+                        @ViewBag.Danas
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card border-primary shadow-sm">
+
+                <div class="card-body">
+
+                    <h5>Ova sedmica</h5>
+
+                    <h2 class="text-primary">
+                        @ViewBag.Sedmica
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card border-warning shadow-sm">
+
+                <div class="card-body">
+
+                    <h5>Ovaj mjesec</h5>
+
+                    <h2 class="text-warning">
+                        @ViewBag.Mjesec
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <h3 class="text-secondary mb-3">
+        Završene dostave
+    </h3>
+
+    @if (!zavrsene.Any())
+    {
+        <div class="alert alert-light">
+            Nema završenih dostava.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-secondary">
+
+            <thead>
+                <tr>
+                    <th>Narudžba</th>
+                    <th>Kupac</th>
+                    <th>Adresa</th>
+                    <th>Status</th>
+                    <th>Vrijeme dostave</th>
+                    <th>Stanje</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in zavrsene)
+                {
+                    <tr>
+
+                        <td>#@item.NarudzbaId</td>
+
+                        <td>
+                            @item.Narudzba?.Korisnik?.Ime
+                            @item.Narudzba?.Korisnik?.Prezime
+                        </td>
+
+                        <td>
+                            @item.Narudzba?.AdresaDostave
+                        </td>
+
+                        <td>
+                            <span class="badge bg-secondary">
+                                @item.Status
+                            </span>
+                        </td>
+
+                        <td>
+                            @item.VrijemeDostave
+                        </td>
+
+                        <td>
+                            <span class="badge bg-dark">
+                                Završena
+                            </span>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    }
+
+</div>

@@ -1,0 +1,106 @@
+﻿@model Glorpa.Models.Narudzba
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<h2 class="mb-4">
+    Detalji narudžbe #@Model.Id
+</h2>
+
+<div class="card shadow p-4">
+
+    <h4>Podaci o kupcu</h4>
+
+    <p>
+        <strong>Ime:</strong>
+        @Model.Korisnik?.Ime
+        @Model.Korisnik?.Prezime
+    </p>
+
+    <p>
+        <strong>Email:</strong>
+        @Model.Korisnik?.Email
+    </p>
+
+    <p>
+        <strong>Telefon:</strong>
+        @Model.Korisnik?.PhoneNumber
+    </p>
+
+    <p>
+        <strong>Adresa dostave:</strong>
+        @Model.AdresaDostave
+    </p>
+
+    <hr />
+
+    <h4>Podaci o narudžbi</h4>
+
+    <p>
+        <strong>Datum:</strong>
+        @Model.Datum
+    </p>
+
+    <p>
+        <strong>Status:</strong>
+        @Model.Status
+    </p>
+
+    <p>
+        <strong>Način plaćanja:</strong>
+        @Model.NacinPlacanja
+    </p>
+
+    <p>
+        <strong>Ukupna cijena:</strong>
+        @Model.UkupnaCijena KM
+    </p>
+
+    <hr />
+
+    <h4>Naručena jela</h4>
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Jelo</th>
+                <th>Količina</th>
+                <th>Cijena</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var stavka in Model.StavkeNarudzbe)
+            {
+                <tr>
+
+                    <td>
+                        @stavka.Jelo?.Naziv
+                    </td>
+
+                    <td>
+                        @stavka.Kolicina
+                    </td>
+
+                    <td>
+                        @(stavka.Cijena * stavka.Kolicina) KM
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+    <a asp-action="Index"
+           class="btn btn-secondary">
+
+        Nazad
+
+    </a>
+
+</div>

@@ -1,0 +1,27 @@
+﻿@model Glorpa.Models.Raspored
+
+<h1>Create Raspored</h1>
+
+<form asp-action="Create">
+
+    <div class="form-group">
+        <label asp-for="Sedmica"></label>
+        <input asp-for="Sedmica" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="KorisnikId"></label>
+
+        <select asp-for="KorisnikId"
+                asp-items="ViewBag.KorisnikId"
+                class="form-control">
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+
+</form>

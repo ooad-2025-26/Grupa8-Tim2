@@ -1,0 +1,28 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Glorpa.Models.ViewModels
+{
+    public class RegisterViewModel
+    {
+        [Required]
+        public string Ime { get; set; }
+
+        [Required]
+        public string Prezime { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        public string Telefon { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("Password")]
+        public string ConfirmPassword { get; set; }
+    }
+}

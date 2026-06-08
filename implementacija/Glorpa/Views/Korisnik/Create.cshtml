@@ -1,0 +1,101 @@
+﻿@model Glorpa.Models.Korisnik
+
+<div class="row justify-content-center">
+
+    <div class="col-md-7">
+
+        <div class="card shadow-soft p-4">
+
+            <h2 class="page-title mb-4">
+                Novi korisnik
+            </h2>
+
+            <div asp-validation-summary="All"
+                 class="alert alert-danger">
+            </div>
+
+            <form asp-action="Create" method="post">
+
+                <div class="mb-3">
+
+                    <label asp-for="Ime"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="Ime"
+                           class="form-control" />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Prezime"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="Prezime"
+                           class="form-control" />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Email"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="Email"
+                           class="form-control" />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="PhoneNumber"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="PhoneNumber"
+                           class="form-control" />
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label asp-for="Uloga"
+                           class="form-label">
+                    </label>
+
+                    <select asp-for="Uloga"
+                            asp-items="Html.GetEnumSelectList<Glorpa.Enums.TipKorisnika>()"
+                            class="form-select">
+                    </select>
+
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <button type="submit"
+                            class="btn btn-success">
+
+                        <i class="bi bi-check-circle"></i>
+                        Sačuvaj
+
+                    </button>
+
+                    <a asp-action="Index"
+                           class="btn btn-secondary">
+
+                        Nazad
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
