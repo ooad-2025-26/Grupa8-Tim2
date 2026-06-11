@@ -1,0 +1,23 @@
+Database Info
+
+Server Name: SQL6034.site4now.net
+Database Name: db_aca8d0_alelale3
+User Name: db_aca8d0_alelale3_admin
+
+
+ASP.NET:
+
+Data Source=SQL6034.site4now.net;Initial Catalog=db_aca8d0_alelale3;User Id=db_aca8d0_alelale3_admin;Password=YOUR_DB_PASSWORD;Encrypt=True;TrustServerCertificate=True;
+
+
+Classic ASP:
+
+Provider=SQLOLEDB;Data Source=SQL6034.site4now.net;Initial Catalog=;User Id=db_aca8d0_alelale3_admin;Password=YOUR_DB_PASSWORD
+
+
+PHP:
+
+
+$serverName = "SQL6034.site4now.net";
+$connectionInfo = array("Database"=>"db_aca8d0_alelale3", "UID"=>"db_aca8d0_alelale3_admin", "PWD"=>"password");
+$conn = sqlsrv_connect($serverName, $connectionInfo);
