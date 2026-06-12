@@ -1,4 +1,0 @@
-wwwroot\audio\perfectcell.mp3
-wwwroot\css\site.css
-wwwroot\images\glorpa.png
-wwwroot\images\perfect.png
