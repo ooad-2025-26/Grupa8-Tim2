@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Glorpa.Models.Jelo>
+@{
+    Layout = "_KupacLayout";
+}
+<h1 class="mb-4">Jelovnik</h1>
+@if (TempData["Greska"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Greska"]
+    </div>
+}
+<div class="row">
+
+    @foreach (var jelo in Model)
+    {
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h4>@jelo.Naziv</h4>
+
+                    <p>
+                        @jelo.Opis
+                    </p>
+                    @if (!string.IsNullOrWhiteSpace(jelo.Tagovi))
+                    {
+                        <div class="mb-2">
+
+                            @foreach (var tag in jelo.Tagovi.Split(','))
+                            {
+                                <span class="badge bg-secondary me-1">
+                                    @tag.Trim()
+                                </span>
+                            }
+
+                        </div>
+                    }
+
+                    <h5 class="text-success">
+                        @jelo.Cijena KM
+                    </h5>
+
+                    <form asp-action="DodajUKorpu"
+                          method="post">
+
+                        <input type="hidden"
+                               name="jeloId"
+                               value="@jelo.Id" />
+
+                        <button type="submit"
+                                class="btn btn-success">
+
+                            Dodaj u korpu
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>

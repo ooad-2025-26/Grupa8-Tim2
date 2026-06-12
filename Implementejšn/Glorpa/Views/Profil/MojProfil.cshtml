@@ -1,0 +1,64 @@
+﻿@model Glorpa.Models.Korisnik
+@{
+    Layout = "_KupacLayout";
+}
+<div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+        <div class="card p-4 shadow">
+
+            <h2>Moj profil</h2>
+
+            <form asp-action="SacuvajProfil">
+
+                <input asp-for="Id" type="hidden" />
+
+                <div class="mb-3">
+                    <label>Ime</label>
+                    <input asp-for="Ime"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Prezime</label>
+                    <input asp-for="Prezime"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Adresa</label>
+
+                    <textarea asp-for="Adresa"
+                              class="form-control"
+                                  rows="3">
+    </textarea>
+
+                    </div>
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input asp-for="Email"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Telefon</label>
+                    <input asp-for="PhoneNumber"
+                           class="form-control" />
+                </div>
+
+                <button type="submit"
+                        class="btn btn-success">
+
+                    Sačuvaj izmjene
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

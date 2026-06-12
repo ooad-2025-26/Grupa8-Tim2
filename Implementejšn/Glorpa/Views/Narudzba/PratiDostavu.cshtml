@@ -1,0 +1,117 @@
+﻿@model Glorpa.Models.Dostava
+
+@{
+    Layout = "_KupacLayout";
+}
+
+<h1 class="mb-4">
+    Praćenje dostave
+</h1>
+
+<div class="card shadow-sm p-4">
+
+    <h4>
+        Narudžba #@Model.NarudzbaId
+    </h4>
+
+    <hr />
+
+    <div class="mb-4">
+
+        <h5>
+
+            @(Model.Status == "DOSTAVLJENA"
+                ? "🟢 Dostavljena"
+
+                : Model.Status == "NA_PUTU"
+                ? "🔵 Na putu"
+
+                : Model.Status == "PREUZETA"
+                ? "🟠 Preuzeta"
+
+                : "🟡 Čeka preuzimanje")
+
+        </h5>
+
+    </div>
+
+    <div class="timeline">
+
+        <div class="mb-4">
+
+            <h5>
+                ✓ Narudžba kreirana
+            </h5>
+
+            <small>
+                @Model.Narudzba.Datum
+            </small>
+
+        </div>
+
+        <div class="mb-4">
+
+            @if (Model.VrijemePreuzimanja.Year > 2000)
+            {
+                <h5>
+                    ✓ Dostavljač preuzeo narudžbu
+                </h5>
+
+                <small>
+                    @Model.VrijemePreuzimanja
+                </small>
+            }
+            else
+            {
+                <h5>
+                    ○ Čeka preuzimanje
+                </h5>
+            }
+
+        </div>
+
+        <div class="mb-4">
+
+            @if (Model.VrijemePolaska != null)
+            {
+                <h5>
+                    ✓ Dostavljač krenuo prema adresi
+                </h5>
+
+                <small>
+                    @Model.VrijemePolaska
+                </small>
+            }
+            else
+            {
+                <h5>
+                    ○ Nije krenuo
+                </h5>
+            }
+
+        </div>
+
+        <div>
+
+            @if (Model.Status == "DOSTAVLJENA")
+            {
+                <h5>
+                    ✓ Dostavljena
+                </h5>
+
+                <small>
+                    @Model.VrijemeDostave
+                </small>
+            }
+            else
+            {
+                <h5>
+                    ○ Dostavljena
+                </h5>
+            }
+
+        </div>
+
+    </div>
+
+</div>

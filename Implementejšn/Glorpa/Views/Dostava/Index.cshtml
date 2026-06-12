@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Glorpa.Models.Dostava>
+@{
+    Layout = "_AdminLayout";
+}
+<h1>Dostave</h1>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Status</th>
+            <th>VrijemePreuzimanja</th>
+            <th>VrijemeDostave</th>
+            <th>Narudzba</th>
+            <th>VremenskiUslovi</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Status</td>
+                <td>@item.VrijemePreuzimanja</td>
+                <td>@item.VrijemeDostave</td>
+                <td>@item.Narudzba?.Id</td>
+                <td>@item.VremenskiUslovi?.Tip</td>
+
+                <td>
+
+                    <div class="d-flex gap-2">
+
+                        <a asp-action="Edit"
+                               asp-route-id="@item.Id"
+                               class="btn btn-sm btn-warning">
+
+                            <i class="bi bi-pencil-square"></i>
+                            Uredi
+
+                        </a>
+
+                        <a asp-action="Details"
+                               asp-route-id="@item.Id"
+                               class="btn btn-sm btn-info text-white">
+
+                            <i class="bi bi-info-circle"></i>
+                            Detalji
+
+                        </a>
+
+                        <a asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="btn btn-sm btn-danger">
+
+                            <i class="bi bi-trash"></i>
+                            Obriši
+
+                        </a>
+
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

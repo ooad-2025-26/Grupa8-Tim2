@@ -1,0 +1,341 @@
+﻿@inject Microsoft.AspNetCore.Identity.UserManager<Glorpa.Models.Korisnik> UserManager
+@{
+    ViewData["Title"] = "Panel dostavljača";
+}
+
+@{
+    Layout = "_DostavljacLayout";
+    ViewData["Title"] = "Panel dostavljača";
+}
+@{
+    var korisnik =
+        await UserManager.GetUserAsync(User);
+
+    bool auto =
+        korisnik?.DostavnoSredstvo == "AUTOMOBIL";
+}
+<div class="text-center">
+
+    <h1 class="display-4">
+        Panel dostavljača
+    </h1>
+
+    <p class="lead">
+        Pregled aktivnih dostava.
+    </p>
+
+    <hr />
+
+    <hr />
+
+    <div class="row g-4 justify-content-center mt-3">
+
+        <div class="col-md-4 col-lg-2">
+            <a asp-controller="Dostava"
+                   asp-action="MojeDostave"
+                   class="text-decoration-none">
+
+                <div class="card dashboard-card">
+
+                    <div class="card-body text-center">
+
+                        <div class="menu-icon">
+                            📦
+                        </div>
+
+                        <h5>
+                            Moje dostave
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </a>
+        </div>
+
+        <div class="col-md-4 col-lg-2">
+            <a asp-controller="Raspored"
+                   asp-action="MojRaspored"
+                   class="text-decoration-none">
+
+                <div class="card dashboard-card">
+
+                    <div class="card-body text-center">
+
+                        <div class="menu-icon">
+                            📅
+                        </div>
+
+                        <h5>
+                            Raspored
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </a>
+        </div>
+
+        <div class="col-md-4 col-lg-2">
+            <a asp-controller="Dostava"
+                   asp-action="StatusDostave"
+                   class="text-decoration-none">
+
+                <div class="card dashboard-card">
+
+                    <div class="card-body text-center">
+
+                        <div class="menu-icon">
+                            🚚
+                        </div>
+
+                        <h5>
+                            Status dostave
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </a>
+        </div>
+
+        <div class="col-md-4 col-lg-2">
+            <a asp-controller="ZahtjevPodrske"
+                   asp-action="Create"
+                   class="text-decoration-none">
+
+                <div class="card dashboard-card">
+
+                    <div class="card-body text-center">
+
+                        <div class="menu-icon">
+                            🎧
+                        </div>
+
+                        <h5>
+                            Podrška
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </a>
+        </div>
+
+        <div class="col-md-4 col-lg-2">
+            <a asp-controller="Zarada"
+                   asp-action="MojaZarada"
+                   class="text-decoration-none">
+
+                <div class="card dashboard-card">
+
+                    <div class="card-body text-center">
+
+                        <div class="menu-icon">
+                            💰
+                        </div>
+
+                        <h5>
+                            Zarada
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </a>
+        </div>
+
+    </div>
+
+    <hr class="my-4" />
+    <hr class="my-4" />
+
+    <div class="card shadow-sm p-4 mx-auto"
+         style="max-width:700px;">
+
+        <h4 class="mb-4 text-center">
+            Dostavno sredstvo
+        </h4>
+
+        <div class="d-flex rounded-pill overflow-hidden border"
+             style="height:90px;">
+
+            <button id="btnBicikl"
+                    class="btn flex-fill border-0 fw-bold fs-4">
+
+                🚲 Bicikl
+
+            </button>
+
+            <button id="btnAuto"
+                    class="btn flex-fill border-0 fw-bold fs-4">
+
+                🚗 Automobil
+
+            </button>
+
+        </div>
+
+        <div class="text-center mt-4">
+
+            @if (auto)
+            {
+                <div class="alert alert-success">
+
+                    <strong>
+                        Trenutno koristite: AUTOMOBIL
+                    </strong>
+
+                    <br />
+
+                    Maksimalno 3 aktivne dostave.
+
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-primary">
+
+                    <strong>
+                        Trenutno koristite: BICIKL
+                    </strong>
+
+                    <br />
+
+                    Maksimalno 1 aktivna dostava.
+
+                </div>
+            }
+
+            <small class="text-muted">
+                Maksimalno 40% dostavljača može koristiti automobil.
+            </small>
+
+        </div>
+
+    </div>
+
+    <script>
+
+            let auto =
+            @(auto.ToString().ToLower());
+
+            const btnBicikl =
+            document.getElementById("btnBicikl");
+
+            const btnAuto =
+            document.getElementById("btnAuto");
+
+            function osvjeziPrikaz()
+            {
+                if (auto)
+                {
+                    btnAuto.style.backgroundColor =
+                        "#198754";
+
+                    btnAuto.style.color =
+                        "white";
+
+                    btnBicikl.style.backgroundColor =
+                        "white";
+
+                    btnBicikl.style.color =
+                        "black";
+                }
+                else
+                {
+                    btnBicikl.style.backgroundColor =
+                        "#0d6efd";
+
+                    btnBicikl.style.color =
+                        "white";
+
+                    btnAuto.style.backgroundColor =
+                        "white";
+
+                    btnAuto.style.color =
+                        "black";
+                }
+            }
+
+            osvjeziPrikaz();
+
+            btnBicikl.addEventListener(
+            "click",
+            async function ()
+            {
+                if (!auto)
+                    return;
+
+                await promijeni();
+            });
+
+            btnAuto.addEventListener(
+            "click",
+            async function ()
+            {
+                if (auto)
+                    return;
+
+                await promijeni();
+            });
+
+            async function promijeni()
+            {
+                const response =
+                    await fetch(
+                        "/Dostava/PromijeniDostavnoSredstvo",
+                        {
+                            method: "POST"
+                        });
+
+                const rezultat =
+                    await response.json();
+
+                if (!rezultat.uspjeh)
+                {
+                    alert(rezultat.poruka);
+                    return;
+                }
+
+                location.reload();
+            }
+
+    </script>
+
+</div>
+<style>
+    .dashboard-card {
+        border: none;
+        border-radius: 22px;
+        background: white;
+        box-shadow: 0 6px 20px rgba(0,0,0,.08);
+        transition: all .25s ease;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.15);
+        }
+
+        .dashboard-card .card-body {
+            padding: 30px 15px;
+        }
+
+        .dashboard-card h5 {
+            color: #222;
+            margin-top: 15px;
+            margin-bottom: 0;
+            font-weight: 600;
+        }
+
+    .menu-icon {
+        font-size: 42px;
+    }
+
+</style>

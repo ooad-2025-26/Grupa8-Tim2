@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Glorpa.Models.ZahtjevPodrske>
+@{
+    Layout = "_AdminLayout";
+}
+<h1 class="mb-4">
+    Zahtjevi podrške
+</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-success">
+        Trenutno nema otvorenih zahtjeva podrške.
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>Prioritet</th>
+
+                <th>Vrijeme</th>
+
+                <th>Dostavljač</th>
+
+                <th>Telefon</th>
+
+                <th>Tip zahtjeva</th>
+
+                <th>Status</th>
+
+                <th>Opis</th>
+
+                <th>Akcija</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                string boja = "";
+
+                if (item.Prioritet == "VISOK")
+                {
+                    boja = "table-danger";
+                }
+                else if (item.Prioritet == "SREDNJI")
+                {
+                    boja = "table-warning";
+                }
+                else
+                {
+                    boja = "table-success";
+                }
+
+                <tr class="@boja">
+
+                    <td>
+                        <strong>@item.Prioritet</strong>
+                    </td>
+
+                    <td>
+                        @item.Datum.ToString("dd.MM.yyyy HH:mm")
+                    </td>
+
+                    <td>
+                        @item.Korisnik?.Ime
+                        @item.Korisnik?.Prezime
+                    </td>
+
+                    <td>
+                        @item.Korisnik?.PhoneNumber
+                    </td>
+
+                    <td>
+                        @item.TipZahtjeva
+                    </td>
+
+                    <td>
+                        @item.Status
+                    </td>
+
+                    <td>
+
+                        <button class="btn btn-secondary btn-sm"
+                                onclick="alert('@item.Opis')">
+
+                            Opis
+
+                        </button>
+
+                    </td>
+
+                    <td>
+
+                        <form asp-action="OznaciObradjen"
+                              method="post"
+                              onsubmit="return confirm('Označiti zahtjev kao obrađen?');">
+
+                            <input type="hidden"
+                                   name="id"
+                                   value="@item.Id" />
+
+                            <button class="btn btn-success btn-sm">
+
+                                Obradi zahtjev
+
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+}

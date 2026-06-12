@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Glorpa.Models.Raspored>
+
+<h1>Rasporedi</h1>
+
+<div class="mb-3">
+
+    <a asp-action="Create"
+           class="btn btn-success">
+
+        <i class="bi bi-plus-circle"></i>
+        Dodaj novi zapis
+
+    </a>
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sedmica</th>
+            <th>Korisnik</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Sedmica</td>
+                <td>@item.Korisnik?.Ime</td>
+
+                <td>
+
+                    <div class="d-flex gap-2">
+
+                        <a asp-action="Edit"
+                               asp-route-id="@item.Id"
+                               class="btn btn-sm btn-warning">
+
+                            <i class="bi bi-pencil-square"></i>
+                            Uredi
+
+                        </a>
+
+                        <a asp-action="Details"
+                               asp-route-id="@item.Id"
+                               class="btn btn-sm btn-info text-white">
+
+                            <i class="bi bi-info-circle"></i>
+                            Detalji
+
+                        </a>
+
+                        <a asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="btn btn-sm btn-danger">
+
+                            <i class="bi bi-trash"></i>
+                            Obriši
+
+                        </a>
+
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

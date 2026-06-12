@@ -1,0 +1,249 @@
+﻿@model IEnumerable<Glorpa.Models.Narudzba>
+@{
+    Layout = "_KupacLayout";
+}
+@using Glorpa.Enums
+
+@{
+    var aktivne =
+        Model.Where(x =>
+            x.Status != "DOSTAVLJENA")
+        .ToList();
+
+    var zavrsene =
+        Model.Where(x =>
+            x.Status == "DOSTAVLJENA")
+        .ToList();
+}
+<h1>Moje narudžbe</h1>
+
+<h2 class="text-success mb-3">
+    Aktivne narudžbe
+</h2>
+
+@if (aktivne.Any())
+{
+    <div class="row">
+
+        @foreach (var item in aktivne)
+        {
+            <div class="col-md-4 mb-3">
+
+                <div class="card border-success shadow-sm">
+
+                    <div class="card-body">
+
+                        <h5>
+                            Narudžba #@item.Id
+                        </h5>
+
+                        <p>
+                            <b>Status:</b>
+                            @item.Status
+                        </p>
+
+                        <p>
+                            <b>Datum:</b>
+                            @item.Datum.ToString("dd.MM.yyyy HH:mm")
+                        </p>
+
+                        <p>
+                            <b>Iznos:</b>
+                            @item.UkupnaCijena KM
+                        </p>
+                        @if (item.Status != "Kreirana")
+                        {
+                            <a asp-controller="Narudzba"
+                                   asp-action="PratiDostavu"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-primary">
+
+                                Prati dostavu
+
+                            </a>
+                        }
+                        else
+                        {
+                            <button class="btn btn-secondary"
+                                    disabled>
+
+                                Čeka dodjelu dostavljača
+
+                            </button>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <div class="alert alert-success">
+
+        Nemate aktivnih narudžbi.
+
+    </div>
+}
+
+<hr class="my-5" />
+
+<h2 class="text-secondary mb-3">
+    Historija narudžbi
+</h2>
+
+<div class="mb-4">
+
+    <button class="btn btn-outline-secondary filterBtn"
+            data-filter="danas">
+        Danas
+    </button>
+
+    <button class="btn btn-outline-secondary filterBtn"
+            data-filter="sedmica">
+        Ove sedmice
+    </button>
+
+    <button class="btn btn-outline-secondary filterBtn"
+            data-filter="mjesec">
+        Ovog mjeseca
+    </button>
+
+</div>
+
+<table class="table table-striped">
+
+    <thead>
+
+        <tr>
+            <th>ID</th>
+            <th>Datum</th>
+            <th>Ukupna cijena</th>
+            <th>Način plaćanja</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in zavrsene)
+        {
+            <tr class="redNarudzbe"
+                data-datum="@item.Datum.ToString("yyyy-MM-dd")">
+
+                <td>@item.Id</td>
+
+                <td>
+                    @item.Datum.ToString("dd.MM.yyyy HH:mm")
+                </td>
+
+                <td>
+                    @item.UkupnaCijena KM
+                </td>
+
+                <td>
+                    @item.NacinPlacanja
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+<script>
+
+    document
+        .querySelectorAll(".filterBtn")
+        .forEach(btn =>
+        {
+            btn.addEventListener("click", function ()
+            {
+                let filter =
+                    this.dataset.filter;
+
+                let danas =
+                    new Date();
+
+                document
+                    .querySelectorAll(".redNarudzbe")
+                    .forEach(red =>
+                    {
+                       let datumNarudzbe =
+    new Date(red.dataset.datum + "T12:00:00");
+                                  
+                        let prikazi =
+                            false;
+
+                        if(filter === "danas")
+                        {
+                                console.log("RAW:", red.dataset.datum);
+
+    let datumNarudzbe =
+        new Date(red.dataset.datum);
+
+    console.log("NARUDZBA:", datumNarudzbe);
+    console.log("DANAS:", danas);
+    console.log("NARUDZBA STRING:", datumNarudzbe.toDateString());
+    console.log("DANAS STRING:", danas.toDateString());
+                            prikazi =
+                                datumNarudzbe
+                                    .toDateString()
+                                ===
+                                danas
+                                    .toDateString();
+                        }
+
+                        else if(filter === "sedmica")
+                        {
+                            let prije7Dana =
+                                new Date();
+
+                            prije7Dana
+                                .setDate(
+                                    danas.getDate() - 7);
+
+                            prikazi =
+                                datumNarudzbe >= prije7Dana;
+                        }
+
+                        else if(filter === "mjesec")
+                        {
+                            prikazi =
+                                datumNarudzbe
+                                    .getMonth()
+                                ===
+                                danas
+                                    .getMonth()
+
+                                &&
+
+                                datumNarudzbe
+                                    .getFullYear()
+                                ===
+                                danas
+                                    .getFullYear();
+                        }
+
+                        red.style.display =
+                            prikazi
+                                ? ""
+                                : "none";
+                    });
+            });
+        });
+
+</script>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+
+        Nemate nijednu narudžbu.
+
+    </div>
+}

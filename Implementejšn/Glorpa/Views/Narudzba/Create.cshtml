@@ -1,0 +1,101 @@
+﻿@model Glorpa.Models.Narudzba
+
+<div class="row justify-content-center">
+
+    <div class="col-md-8">
+
+        <div class="card shadow-soft p-4">
+
+            <h2 class="page-title mb-4">
+                Nova narudžba
+            </h2>
+
+            <form asp-action="Create" method="post">
+
+                <div class="mb-3">
+
+                    <label asp-for="Datum"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="Datum"
+                           class="form-control" />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Status"
+                           class="form-label">
+                    </label>
+
+                    <select asp-for="Status"
+                            asp-items="Html.GetEnumSelectList<Glorpa.Enums.StatusNarudzbe>()"
+                            class="form-select">
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="UkupnaCijena"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="UkupnaCijena"
+                           class="form-control" />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="NacinPlacanja"
+                           class="form-label">
+                    </label>
+
+                    <select asp-for="NacinPlacanja"
+                            asp-items="Html.GetEnumSelectList<Glorpa.Enums.TipPlacanja>()"
+                            class="form-select">
+                    </select>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label asp-for="KorisnikId"
+                           class="form-label">
+                    </label>
+
+                    <select asp-for="KorisnikId"
+                            asp-items="ViewBag.KorisnikId"
+                            class="form-select">
+                    </select>
+
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <button type="submit"
+                            class="btn btn-success">
+
+                        <i class="bi bi-check-circle"></i>
+                        Sačuvaj
+
+                    </button>
+
+                    <a asp-action="Index"
+                           class="btn btn-secondary">
+
+                        Nazad
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
