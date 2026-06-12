@@ -12,10 +12,12 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Glorpa/Glorpa.csproj", "Glorpa/"]
-RUN dotnet restore "./Glorpa/Glorpa.csproj"
+COPY ["Glorpa.csproj", "./"]
+
+RUN dotnet restore "./Glorpa.csproj"
+
 COPY . .
-WORKDIR "/src/Glorpa"
+
 RUN dotnet build "./Glorpa.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
